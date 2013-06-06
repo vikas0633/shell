@@ -1,3 +1,4 @@
+
 #!/bin/bash
 #PBS -l nodes=1:ppn=10
 #PBS -l vmem=90000mb
@@ -16,6 +17,7 @@ module load samtools/0.1.19
 module load bwa/0.6.2
 module load cufflinks/2.1.1
 
+
 WORKDIR="/lustre/home/vgupta2/01_blueberry/04_mapping"
 SCRIPT_NAME="20130605_bam2cuff_bb_se.sh"
 LOGFILE=`date "+20%y%m%d_%H%M"`."$SCRIPT_NAME"".logfile"
@@ -28,6 +30,7 @@ echo "Job has been started: " `date "+20%y%m%d_%H%M"` >> $LOGFILE
 GENOME="/lustre/groups/lorainelab/data/blueberry/01_genome/bberry/newbler/454Scaffolds.fna" 
 OUTDIR="/lustre/groups/lorainelab/data/blueberry/02_mergedBam"
 
+:<<COMMENT
 ### merged single end reads
 echo "Merging single ends bam files: " `date "+20%y%m%d_%H%M"` >> $LOGFILE
 
@@ -72,7 +75,6 @@ samtools merge Illumina_merged.bam \
                SE_merged.bam \
                PE_merged.bam
 
-
 ### bam_file
 bam="Illumina_merged.bam"
 sam="Illumina_merged.sam"
@@ -80,6 +82,8 @@ sam="Illumina_merged.sam"
 echo "Converting Bam file to Sam: " `date "+20%y%m%d_%H%M"` >> $LOGFILE
 ### convert bam to sam
 samtools view "$OUTDIR"/"$bam" > "$OUTDIR"/"$sam"
+
+COMMENT
 
 ### run cufflink
 echo "Running Cufflinks: " `date "+20%y%m%d_%H%M"` >> $LOGFILE
