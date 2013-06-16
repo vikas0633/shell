@@ -8,3 +8,4 @@
 20130525_gmap_454.sh - Making GMAP alignment from 454 alignment <br />
 20130605_454_GMAP_GFF3.sh - Making GMAP GFF3 from 454 alignment <br />
 20130605_bam2cuff_bb_se.sh - Making Cufflinks genemodels from the illumina data <br />
+20130616_GeneMark_Blueberry.sh - Running GeneMark for Blueberry genome <br />
