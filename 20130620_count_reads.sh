@@ -37,7 +37,7 @@ do
 	count=`expr $lines / 4`
 	bam_name=`echo $file | awk '{split ($0, arr, "."); print arr[1]}'`.bam
 	bam="/lustre/groups/lorainelab/data/blueberry/illumina_DHMR/se_trimmed/bb_se_TH2.0.6_6K_processed/""$bam_name"
-	mapped_reads=`samtools view -F 4 $bam | wc -l`
+	mapped_reads=`samtools view -F 4 $bam | cut -f 1 | sort | uniq | wc -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done
 
@@ -50,32 +50,37 @@ do
 	count=`expr $lines / 4`
 	bam_name=`echo $file | awk '{split ($0, arr, "_"); print arr[1]"_"arr[2]}'`.bam
 	bam="/lustre/groups/lorainelab/data/blueberry/pe_blueberry/trimmed_pe/pe_TH2.0.6_processed/""$bam_name"
-	mapped_reads=`samtools view -F 4 $bam | wc  -l`
+	### read1
+	mapped_reads=`samtools view -f 0x0040 $bam | cut -f 1| sort | uniq | wc  -l`
+	echo -e "$file" "," "$count" "," "$mapped_reads"
+	### read2
+	file=`echo $file | sed 's/Read1/Read2/g'`
+	mapped_reads=`samtools view -f 0x0080 $bam | cut -f 1| sort | uniq | wc  -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done
 
 
-cd /lustre/groups/lorainelab/data/blueberry/dhmri_ONeal_454_run_2009_06_18/fastq/trimmed
+cd /lustre/groups/lorainelab/data/blueberry/dhmri_ONeal_454_run_2009_06_18/fastq
 echo -e "file name"",""FastqReads"",""Mapped reads"
-for file in *trimmed
+for file in *fastq
 do
 	lines=` wc -l $file | cut -d ' ' -f 1`
 	count=`expr $lines / 4`
 	bam_name="$file""_sorted.bam"
 	bam="$bam_name"
-	mapped_reads=`samtools view -F 4 $bam | wc  -l`
+	mapped_reads=`samtools view -F 4 $bam |cut -f 1 | sort | uniq | wc  -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done
 
-cd /lustre/groups/lorainelab/data/blueberry/ncsu_ONeal_454_Aug_2010/files_from_ncsu_gsl/fastq/trimmed
+cd /lustre/groups/lorainelab/data/blueberry/ncsu_ONeal_454_Aug_2010/files_from_ncsu_gsl/fastq
 echo -e "file name"",""FastqReads"",""Mapped reads"
-for file in *trimmed
+for file in *fastq
 do
 	lines=` wc -l $file | cut -d ' ' -f 1`
 	count=`expr $lines / 4`
 	bam_name="$file""_sorted.bam"
 	bam="$bam_name"
-	mapped_reads=`samtools view -F 4 $bam | wc -l`
+	mapped_reads=`samtools view -F 4 $bam | cut -f 1| sort | uniq | wc -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done 
 
