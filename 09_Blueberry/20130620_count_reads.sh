@@ -20,6 +20,8 @@ SCRIPT_NAME="20130601_GeneMark_scaffolds.sh"
 LOGFILE=`date "+20%y%m%d_%H%M"`."$SCRIPT_NAME"".logfile"
 LOGFILE=$WORKDIR"/"$LOGFILE
 
+# samtools documentation
+# http://davetang.org/wiki/tiki-index.php?page=SAMTools
 
 echo '----------------------------------------------' > $LOGFILE
 echo "Job has been started: " `date "+20%y%m%d_%H%M"` >> $LOGFILE
@@ -35,7 +37,7 @@ do
 	count=`expr $lines / 4`
 	bam_name=`echo $file | awk '{split ($0, arr, "."); print arr[1]}'`.bam
 	bam="/lustre/groups/lorainelab/data/blueberry/illumina_DHMR/se_trimmed/bb_se_TH2.0.6_6K_processed/""$bam_name"
-	mapped_reads=`samtools view $bam | cut -f 1 | sort | uniq | wc -l `
+	mapped_reads=`samtools view -F 4 $bam | wc -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done
 
@@ -48,7 +50,7 @@ do
 	count=`expr $lines / 4`
 	bam_name=`echo $file | awk '{split ($0, arr, "_"); print arr[1]"_"arr[2]}'`.bam
 	bam="/lustre/groups/lorainelab/data/blueberry/pe_blueberry/trimmed_pe/pe_TH2.0.6_processed/""$bam_name"
-	mapped_reads=`samtools view $bam | cut -f 1 | sort | uniq | wc -l `
+	mapped_reads=`samtools view -F 4 $bam | wc  -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done
 
@@ -61,7 +63,7 @@ do
 	count=`expr $lines / 4`
 	bam_name="$file""_sorted.bam"
 	bam="$bam_name"
-	mapped_reads=`samtools view $bam | cut -f 1 | sort | uniq | wc -l `
+	mapped_reads=`samtools view -F 4 $bam | wc  -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done
 
@@ -73,7 +75,7 @@ do
 	count=`expr $lines / 4`
 	bam_name="$file""_sorted.bam"
 	bam="$bam_name"
-	mapped_reads=`samtools view $bam | cut -f 1 | sort | uniq | wc -l `
+	mapped_reads=`samtools view -F 4 $bam | wc -l`
 	echo -e "$file" "," "$count" "," "$mapped_reads"
 done 
 
