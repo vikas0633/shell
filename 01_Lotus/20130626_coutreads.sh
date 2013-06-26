@@ -23,7 +23,7 @@ read2=("/u/pm/data/mg20_genomic_fasteris/ghd41_500bp/100608_s_8_2_seq_GHD-41-fil
 len=${#read1[*]}
 for (( i=0; i<len; i++ ))
 do
-file=${read1[$i]
+file=${read1[$i]}
 lines=` wc -l $file | cut -d ' ' -f 1`
 count=`expr $lines / 4`
 bam="$file"_sorted.bam
@@ -31,7 +31,7 @@ bam="$file"_sorted.bam
 mapped_reads=`samtools view -f 0x0040 $bam | cut -f 1| sort | uniq | wc  -l`
 echo -e "$file" "," "$count" "," "$mapped_reads"
 ### read2
-file=${read2[$i]
+file=${read2[$i]}
 mapped_reads=`samtools view -f 0x0080 $bam | cut -f 1| sort | uniq | wc  -l`
 done
 
