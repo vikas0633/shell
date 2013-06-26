@@ -1,6 +1,6 @@
 ### set read name variables
 
-echo -e "$file" "," "$count" "," "$mapped_reads"
+echo -e "file name"",""FastqReads"",""Mapped reads"
 
 read1=("/u/pm/data/mg20_genomic_fasteris/ghd41_500bp/100608_s_8_1_seq_GHD-41-filt-PE.fastq.tagdusted.fq.repfiltered.fq" \
 "/u/pm/data/mg20_genomic_fasteris/ghd41_500bp/100810_s_2_1_GHD-41.fastq.tagdusted.fq.repfiltered.fq" \
@@ -33,5 +33,6 @@ echo -e "$file" "," "$count" "," "$mapped_reads"
 ### read2
 file=${read2[$i]}
 mapped_reads=`samtools view -f 0x0080 $bam | cut -f 1| sort | uniq | wc  -l`
+echo -e "$file" "," "$count" "," "$mapped_reads"
 done
 
