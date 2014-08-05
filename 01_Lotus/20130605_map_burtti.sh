@@ -31,18 +31,29 @@ for file in *.txt;
 do nice -n 19 bwa aln -t 6 -l 28 "$ref_file" $file > $file.sai;
 done;
 
+
 ### faidx for referance genome
 nice -n 19 samtools faidx "$ref_file"
 
 ####--------------mapping the reads ---------------------------------####
 
-nice -n 19 bwa sampe -P "$ref_file" "$read_1_1"".sai" "$read_1_2"".sai"  "$read_1_1" "$read_1_2" | nice -n 19 perl -lane 'print $_ if ($F[3] > 0 || $F[0] =~ m/^@/)'| nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_1_1"_sorted
+rg="110401_SN132_A_s_4_1_corrected_GPH-3.txt"
+rg="@RG\tID:$rg\tSM:$rg\tPL:illumina\tLB:lib1\tPU:unit"
+nice -n 19 bwa sampe -P -r $rg "$ref_file" "$read_1_1"".sai" "$read_1_2"".sai"  "$read_1_1" "$read_1_2" | nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_1_1"_sorted
 
-nice -n 19 bwa sampe -P "$ref_file" "$read_2_1"".sai" "$read_2_2"".sai"  "$read_2_1" "$read_2_2" | nice -n 19 perl -lane 'print $_ if ($F[3] > 0 || $F[0] =~ m/^@/)'| nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_2_1"_sorted
+rg="110401_SN132_A_s_4_1_corrected_GPH-4.txt"
+rg="@RG\tID:$rg\tSM:$rg\tPL:illumina\tLB:lib1\tPU:unit"
 
-nice -n 19 bwa sampe -P "$ref_file" "$read_3_1"".sai" "$read_3_2"".sai"  "$read_3_1" "$read_3_2" | nice -n 19 perl -lane 'print $_ if ($F[3] > 0 || $F[0] =~ m/^@/)'| nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_3_1"_sorted
+nice -n 19 bwa sampe -P -r $rg "$ref_file" "$read_2_1"".sai" "$read_2_2"".sai"  "$read_2_1" "$read_2_2" | nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_2_1"_sorted
 
-nice -n 19 bwa sampe -P "$ref_file" "$read_4_1"".sai" "$read_4_2"".sai"  "$read_4_1" "$read_4_2" | nice -n 19 perl -lane 'print $_ if ($F[3] > 0 || $F[0] =~ m/^@/)'| nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_4_1"_sorted
+
+rg="110421_SN365_B_s_4_1_seq_GPH-3.txt"
+rg="@RG\tID:$rg\tSM:$rg\tPL:illumina\tLB:lib1\tPU:unit"
+nice -n 19 bwa sampe -P -r $rg "$ref_file" "$read_3_1"".sai" "$read_3_2"".sai"  "$read_3_1" "$read_3_2" | nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_3_1"_sorted
+
+rg="110421_SN365_B_s_4_1_seq_GPH-4.txt"
+rg="@RG\tID:$rg\tSM:$rg\tPL:illumina\tLB:lib1\tPU:unit"
+nice -n 19 bwa sampe -P -r $rg "$ref_file" "$read_4_1"".sai" "$read_4_2"".sai"  "$read_4_1" "$read_4_2" | nice -n 19 samtools view -bt "$ref_file".fai -| nice -n 19 samtools sort - "$read_4_1"_sorted
 
 
 samtools merge Burtii_20130605.bam \
@@ -53,6 +64,6 @@ samtools merge Burtii_20130605.bam \
                
 
 ### remove index file
-rm *.sai
+#rm *.sai
 #rm *_trimmed
 
