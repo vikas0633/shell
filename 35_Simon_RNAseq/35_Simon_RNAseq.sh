@@ -972,7 +972,7 @@ cd /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/01_GeneWise/
 rm -rf *.summary
 
 ### merge the count files
-paste *.values > 20140805_AllSamples_FeatureCount.txt
+paste -d '\t' *.values > 20140805_AllSamples_FeatureCount.txt
 cut -f 1,\
 2,4,6,8,10,\
 12,14,16,18,20,\
@@ -989,6 +989,730 @@ cut -f 1,\
 122,124,126,128,130,\
 132,134,136,138,140 \
  20140805_AllSamples_FeatureCount.txt > 20140805_AllSamples_FeatureCount.txt.values
+ 
+ ### normalize the counts
+python ~/script/python/134_normalize_table.py 20140805_AllSamples_FeatureCount.txt.values > 20140805_AllSamples_FeatureCount.txt.values.norm
+ 
+ ### load table into MySQL
+CREATE TABLE `20140810_AllSamples_Gene_FeatureCount` 
+( ID VARCHAR(100),
+277_exoU_24_B1 FLOAT,
+277_exoU_24_B2 FLOAT,
+277_exoU_24_B3 FLOAT,
+277_exoU_72_B1 FLOAT,
+277_exoU_72_B2 FLOAT,
+277_exoU_72_B3 FLOAT,
+277_exoYF_24_B1 FLOAT,
+277_exoYF_24_B2 FLOAT,
+277_exoYF_24_B3 FLOAT,
+277_exoYF_72_B1 FLOAT,
+277_exoYF_72_B2 FLOAT,
+277_exoYF_72_B3 FLOAT,
+277_H2O_24_B2 FLOAT,
+277_H2O_24_B3 FLOAT,
+277_nodC_24_B1 FLOAT,
+277_nodC_24_B2 FLOAT,
+277_nodC_24_B3 FLOAT,
+277_R7A_24_B1 FLOAT,
+277_R7A_24_B2 FLOAT,
+277_R7A_24_B3 FLOAT,
+277_R7A_72_B1 FLOAT,
+277_R7A_72_B2 FLOAT,
+277_R7A_72_B3 FLOAT,
+311_exoU_24_B1 FLOAT,
+311_exoU_24_B2 FLOAT,
+311_exoU_24_B3 FLOAT,
+311_exoU_72_B1 FLOAT,
+311_exoU_72_B2 FLOAT,
+311_exoU_72_B3 FLOAT,
+311_exoYF_24_B1 FLOAT,
+311_exoYF_24_B2 FLOAT,
+311_exoYF_24_B3 FLOAT,
+311_exoYF_72_B1 FLOAT,
+311_exoYF_72_B2 FLOAT,
+311_exoYF_72_B3 FLOAT,
+311_H2O_24_B1 FLOAT,
+311_H2O_24_B3 FLOAT,
+311_nodC_24_B1 FLOAT,
+311_nodC_24_B2 FLOAT,
+311_nodC_24_B3 FLOAT,
+311_R7A_24_B1 FLOAT,
+311_R7A_24_B2 FLOAT,
+311_R7A_24_B3 FLOAT,
+311_R7A_72_B1 FLOAT,
+311_R7A_72_B2 FLOAT,
+311_R7A_72_B3 FLOAT,
+G_exoU_24_B1 FLOAT,
+G_exoU_24_B2 FLOAT,
+G_exoU_24_B3 FLOAT,
+G_exoU_72_B1 FLOAT,
+G_exoU_72_B2 FLOAT,
+G_exoU_72_B3 FLOAT,
+G_exoYF_24_B1 FLOAT,
+G_exoYF_24_B2 FLOAT,
+G_exoYF_24_B3 FLOAT,
+G_exoYF_72_B1 FLOAT,
+G_exoYF_72_B2 FLOAT,
+G_exoYF_72_B3 FLOAT,
+G_H2O_24_B1 FLOAT,
+G_H2O_24_B2 FLOAT,
+G_H2O_24_B3 FLOAT,
+G_nodC_24_B1 FLOAT,
+G_nodC_24_B2 FLOAT,
+G_nodC_24_B3 FLOAT,
+G_R7A_24_B1 FLOAT,
+G_R7A_24_B2 FLOAT,
+G_R7A_24_B3 FLOAT,
+G_R7A_72_B1 FLOAT,
+G_R7A_72_B2 FLOAT,
+G_R7A_72_B3 FLOAT,
+sum FLOAT,
+277_exoU_24_B1_norm FLOAT,
+277_exoU_24_B2_norm FLOAT,
+277_exoU_24_B3_norm FLOAT,
+277_exoU_72_B1_norm FLOAT,
+277_exoU_72_B2_norm FLOAT,
+277_exoU_72_B3_norm FLOAT,
+277_exoYF_24_B1_norm FLOAT,
+277_exoYF_24_B2_norm FLOAT,
+277_exoYF_24_B3_norm FLOAT,
+277_exoYF_72_B1_norm FLOAT,
+277_exoYF_72_B2_norm FLOAT,
+277_exoYF_72_B3_norm FLOAT,
+277_H2O_24_B2_norm FLOAT,
+277_H2O_24_B3_norm FLOAT,
+277_nodC_24_B1_norm FLOAT,
+277_nodC_24_B2_norm FLOAT,
+277_nodC_24_B3_norm FLOAT,
+277_R7A_24_B1_norm FLOAT,
+277_R7A_24_B2_norm FLOAT,
+277_R7A_24_B3_norm FLOAT,
+277_R7A_72_B1_norm FLOAT,
+277_R7A_72_B2_norm FLOAT,
+277_R7A_72_B3_norm FLOAT,
+311_exoU_24_B1_norm FLOAT,
+311_exoU_24_B2_norm FLOAT,
+311_exoU_24_B3_norm FLOAT,
+311_exoU_72_B1_norm FLOAT,
+311_exoU_72_B2_norm FLOAT,
+311_exoU_72_B3_norm FLOAT,
+311_exoYF_24_B1_norm FLOAT,
+311_exoYF_24_B2_norm FLOAT,
+311_exoYF_24_B3_norm FLOAT,
+311_exoYF_72_B1_norm FLOAT,
+311_exoYF_72_B2_norm FLOAT,
+311_exoYF_72_B3_norm FLOAT,
+311_H2O_24_B1_norm FLOAT,
+311_H2O_24_B3_norm FLOAT,
+311_nodC_24_B1_norm FLOAT,
+311_nodC_24_B2_norm FLOAT,
+311_nodC_24_B3_norm FLOAT,
+311_R7A_24_B1_norm FLOAT,
+311_R7A_24_B2_norm FLOAT,
+311_R7A_24_B3_norm FLOAT,
+311_R7A_72_B1_norm FLOAT,
+311_R7A_72_B2_norm FLOAT,
+311_R7A_72_B3_norm FLOAT,
+G_exoU_24_B1_norm FLOAT,
+G_exoU_24_B2_norm FLOAT,
+G_exoU_24_B3_norm FLOAT,
+G_exoU_72_B1_norm FLOAT,
+G_exoU_72_B2_norm FLOAT,
+G_exoU_72_B3_norm FLOAT,
+G_exoYF_24_B1_norm FLOAT,
+G_exoYF_24_B2_norm FLOAT,
+G_exoYF_24_B3_norm FLOAT,
+G_exoYF_72_B1_norm FLOAT,
+G_exoYF_72_B2_norm FLOAT,
+G_exoYF_72_B3_norm FLOAT,
+G_H2O_24_B1_norm FLOAT,
+G_H2O_24_B2_norm FLOAT,
+G_H2O_24_B3_norm FLOAT,
+G_nodC_24_B1_norm FLOAT,
+G_nodC_24_B2_norm FLOAT,
+G_nodC_24_B3_norm FLOAT,
+G_R7A_24_B1_norm FLOAT,
+G_R7A_24_B2_norm FLOAT,
+G_R7A_24_B3_norm FLOAT,
+G_R7A_72_B1_norm FLOAT,
+G_R7A_72_B2_norm FLOAT,
+G_R7A_72_B3_norm FLOAT,
+sum_norm FLOAT,
+score FLOAT );
+
+LOAD DATA LOCAL INFILE '/u/vgupta/35_Simon_RNAseq/04_FeatureCount/01_GeneWise/20140805_AllSamples_FeatureCount.txt.values.norm' INTO TABLE  `20140810_AllSamples_Gene_FeatureCount` IGNORE 1 LINES;
+
+CREATE INDEX `20140810_AllSamples_Gene_FeatureCount.index` ON `20140810_AllSamples_Gene_FeatureCount` (ID); 
+
+
+## add annotations
+CREATE TABLE 20140810_AllSamples_Gene_FeatureCount_anno AS 
+(
+SELECT Lj30_ID,Chromosome,Start,END,nr_anno,cdsSeq_len,
+277_exoU_24_B1  ,
+277_exoU_24_B2  ,
+277_exoU_24_B3  ,
+277_exoU_72_B1  ,
+277_exoU_72_B2  ,
+277_exoU_72_B3  ,
+277_exoYF_24_B1  ,
+277_exoYF_24_B2  ,
+277_exoYF_24_B3  ,
+277_exoYF_72_B1  ,
+277_exoYF_72_B2  ,
+277_exoYF_72_B3  ,
+277_H2O_24_B2  ,
+277_H2O_24_B3  ,
+277_nodC_24_B1  ,
+277_nodC_24_B2  ,
+277_nodC_24_B3  ,
+277_R7A_24_B1  ,
+277_R7A_24_B2  ,
+277_R7A_24_B3  ,
+277_R7A_72_B1  ,
+277_R7A_72_B2  ,
+277_R7A_72_B3  ,
+311_exoU_24_B1  ,
+311_exoU_24_B2  ,
+311_exoU_24_B3  ,
+311_exoU_72_B1  ,
+311_exoU_72_B2  ,
+311_exoU_72_B3  ,
+311_exoYF_24_B1  ,
+311_exoYF_24_B2  ,
+311_exoYF_24_B3  ,
+311_exoYF_72_B1  ,
+311_exoYF_72_B2  ,
+311_exoYF_72_B3  ,
+311_H2O_24_B1  ,
+311_H2O_24_B3  ,
+311_nodC_24_B1  ,
+311_nodC_24_B2  ,
+311_nodC_24_B3  ,
+311_R7A_24_B1  ,
+311_R7A_24_B2  ,
+311_R7A_24_B3  ,
+311_R7A_72_B1  ,
+311_R7A_72_B2  ,
+311_R7A_72_B3  ,
+G_exoU_24_B1  ,
+G_exoU_24_B2  ,
+G_exoU_24_B3  ,
+G_exoU_72_B1  ,
+G_exoU_72_B2  ,
+G_exoU_72_B3  ,
+G_exoYF_24_B1  ,
+G_exoYF_24_B2  ,
+G_exoYF_24_B3  ,
+G_exoYF_72_B1  ,
+G_exoYF_72_B2  ,
+G_exoYF_72_B3  ,
+G_H2O_24_B1  ,
+G_H2O_24_B2  ,
+G_H2O_24_B3  ,
+G_nodC_24_B1  ,
+G_nodC_24_B2  ,
+G_nodC_24_B3  ,
+G_R7A_24_B1  ,
+G_R7A_24_B2  ,
+G_R7A_24_B3  ,
+G_R7A_72_B1  ,
+G_R7A_72_B2  ,
+G_R7A_72_B3  ,
+sum  ,
+277_exoU_24_B1_norm  ,
+277_exoU_24_B2_norm  ,
+277_exoU_24_B3_norm  ,
+277_exoU_72_B1_norm  ,
+277_exoU_72_B2_norm  ,
+277_exoU_72_B3_norm  ,
+277_exoYF_24_B1_norm  ,
+277_exoYF_24_B2_norm  ,
+277_exoYF_24_B3_norm  ,
+277_exoYF_72_B1_norm  ,
+277_exoYF_72_B2_norm  ,
+277_exoYF_72_B3_norm  ,
+277_H2O_24_B2_norm  ,
+277_H2O_24_B3_norm  ,
+277_nodC_24_B1_norm  ,
+277_nodC_24_B2_norm  ,
+277_nodC_24_B3_norm  ,
+277_R7A_24_B1_norm  ,
+277_R7A_24_B2_norm  ,
+277_R7A_24_B3_norm  ,
+277_R7A_72_B1_norm  ,
+277_R7A_72_B2_norm  ,
+277_R7A_72_B3_norm  ,
+311_exoU_24_B1_norm  ,
+311_exoU_24_B2_norm  ,
+311_exoU_24_B3_norm  ,
+311_exoU_72_B1_norm  ,
+311_exoU_72_B2_norm  ,
+311_exoU_72_B3_norm  ,
+311_exoYF_24_B1_norm  ,
+311_exoYF_24_B2_norm  ,
+311_exoYF_24_B3_norm  ,
+311_exoYF_72_B1_norm  ,
+311_exoYF_72_B2_norm  ,
+311_exoYF_72_B3_norm  ,
+311_H2O_24_B1_norm  ,
+311_H2O_24_B3_norm  ,
+311_nodC_24_B1_norm  ,
+311_nodC_24_B2_norm  ,
+311_nodC_24_B3_norm  ,
+311_R7A_24_B1_norm  ,
+311_R7A_24_B2_norm  ,
+311_R7A_24_B3_norm  ,
+311_R7A_72_B1_norm  ,
+311_R7A_72_B2_norm  ,
+311_R7A_72_B3_norm  ,
+G_exoU_24_B1_norm  ,
+G_exoU_24_B2_norm  ,
+G_exoU_24_B3_norm  ,
+G_exoU_72_B1_norm  ,
+G_exoU_72_B2_norm  ,
+G_exoU_72_B3_norm  ,
+G_exoYF_24_B1_norm  ,
+G_exoYF_24_B2_norm  ,
+G_exoYF_24_B3_norm  ,
+G_exoYF_72_B1_norm  ,
+G_exoYF_72_B2_norm  ,
+G_exoYF_72_B3_norm  ,
+G_H2O_24_B1_norm  ,
+G_H2O_24_B2_norm  ,
+G_H2O_24_B3_norm  ,
+G_nodC_24_B1_norm  ,
+G_nodC_24_B2_norm  ,
+G_nodC_24_B3_norm  ,
+G_R7A_24_B1_norm  ,
+G_R7A_24_B2_norm  ,
+G_R7A_24_B3_norm  ,
+G_R7A_72_B1_norm  ,
+G_R7A_72_B2_norm  ,
+G_R7A_72_B3_norm  ,
+sum_norm  ,
+score   
+FROM gene_models.20130801_Ljr30_genemodel t1 JOIN 35_Simon_RNAseq.20140810_AllSamples_Gene_FeatureCount t2 
+ON t1.Lj30_ID=t2.ID
+);
+
+### check nin
+SELECT Lj30_ID, Chromosome,Start, cdsSeq_len, LEFT(nr_anno,50),  G_H2O_24_B3, G_exoU_24_B3, G_exoU_24_B3/G_H2O_24_B3 as Fold_Change
+FROM 20140810_AllSamples_Gene_FeatureCount_anno 
+WHERE
+nr_anno LIKE '%nodule inception protein%';
+
+### check nin
+SELECT Lj30_ID, Chromosome,Start, cdsSeq_len, LEFT(nr_anno,50),  G_H2O_24_B3, G_exoU_24_B3, G_exoU_24_B3/G_H2O_24_B3 as Fold_Change
+FROM 20140728_Allsample_2unique_transcript_HTseqCounts_anno 
+WHERE
+nr_anno LIKE '%nodule inception protein%';
+ 
+ 
+ ### run featurecount by transcript
+cd /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise
+GTF="/array/users/vgupta/lotus_3.0/20140314_Lj30.gtf"
+data_dir="/array/users/vgupta/35_Simon_RNAseq/2014-07-10"
+cd $data_dir
+for file in NG-*.fastq
+do
+echo $file
+### work dir
+full_path=$file
+f=$(basename $full_path)
+dir=$(dirname $full_path)
+work_dir=$data_dir/"dir_"$f
+local_file="accepted_hits.2unique.bam"
+featureCounts -T 1 -O -M -a $GTF -t exon -g transcript_id  -o /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file" $work_dir/$local_file 
+grep -v '^#' /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file" | cut -f 1,7 > /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file".values
+rm /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file"
+done
+
+rm -rf *.summary
+
+data_dir="/array/users/vgupta/35_Simon_RNAseq/2014-07-21"
+cd $data_dir
+for file in NG-*.fastq
+do
+echo $file
+### work dir
+full_path=$file
+f=$(basename $full_path)
+dir=$(dirname $full_path)
+work_dir=$data_dir/"dir_"$f
+local_file="accepted_hits.2unique.bam"
+featureCounts -T 1 -O -M -a $GTF -t exon -g transcript_id -o /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file" $work_dir/$local_file 
+grep -v '^#' /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file" | cut -f 1,7 > /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file".values
+rm /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/"$f"."$local_file"
+done
+
+cd /array/users/vgupta/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/
+rm -rf *.summary
+
+### merge the count files
+paste -d '\t' *.values > 20140807_AllSamples_FeatureCount.txt
+cut -f 1,\
+2,4,6,8,10,\
+12,14,16,18,20,\
+22,24,26,28,30,\
+32,34,36,38,40,\
+42,44,46,48,50,\
+52,54,56,58,60,\
+62,64,66,68,70,\
+72,74,76,78,80,\
+82,84,86,88,90,\
+92,94,96,98,100,\
+102,104,106,108,110,\
+112,114,116,118,120,\
+122,124,126,128,130,\
+132,134,136,138,140 \
+ 20140807_AllSamples_FeatureCount.txt > 20140807_AllSamples_FeatureCount.txt.values
+ 
+ # Fix headers manually
+ 
+ ### normalize the counts
+python ~/script/python/134_normalize_table.py 20140807_AllSamples_FeatureCount.txt.values > 20140807_AllSamples_FeatureCount.txt.values.norm
+ 
+ ### load table into MySQL
+CREATE TABLE `20140810_AllSamples_Transcript_FeatureCount` 
+( ID VARCHAR(100),
+277_exoU_24_B1 FLOAT,
+277_exoU_24_B2 FLOAT,
+277_exoU_24_B3 FLOAT,
+277_exoU_72_B1 FLOAT,
+277_exoU_72_B2 FLOAT,
+277_exoU_72_B3 FLOAT,
+277_exoYF_24_B1 FLOAT,
+277_exoYF_24_B2 FLOAT,
+277_exoYF_24_B3 FLOAT,
+277_exoYF_72_B1 FLOAT,
+277_exoYF_72_B2 FLOAT,
+277_exoYF_72_B3 FLOAT,
+277_H2O_24_B2 FLOAT,
+277_H2O_24_B3 FLOAT,
+277_nodC_24_B1 FLOAT,
+277_nodC_24_B2 FLOAT,
+277_nodC_24_B3 FLOAT,
+277_R7A_24_B1 FLOAT,
+277_R7A_24_B2 FLOAT,
+277_R7A_24_B3 FLOAT,
+277_R7A_72_B1 FLOAT,
+277_R7A_72_B2 FLOAT,
+277_R7A_72_B3 FLOAT,
+311_exoU_24_B1 FLOAT,
+311_exoU_24_B2 FLOAT,
+311_exoU_24_B3 FLOAT,
+311_exoU_72_B1 FLOAT,
+311_exoU_72_B2 FLOAT,
+311_exoU_72_B3 FLOAT,
+311_exoYF_24_B1 FLOAT,
+311_exoYF_24_B2 FLOAT,
+311_exoYF_24_B3 FLOAT,
+311_exoYF_72_B1 FLOAT,
+311_exoYF_72_B2 FLOAT,
+311_exoYF_72_B3 FLOAT,
+311_H2O_24_B1 FLOAT,
+311_H2O_24_B3 FLOAT,
+311_nodC_24_B1 FLOAT,
+311_nodC_24_B2 FLOAT,
+311_nodC_24_B3 FLOAT,
+311_R7A_24_B1 FLOAT,
+311_R7A_24_B2 FLOAT,
+311_R7A_24_B3 FLOAT,
+311_R7A_72_B1 FLOAT,
+311_R7A_72_B2 FLOAT,
+311_R7A_72_B3 FLOAT,
+G_exoU_24_B1 FLOAT,
+G_exoU_24_B2 FLOAT,
+G_exoU_24_B3 FLOAT,
+G_exoU_72_B1 FLOAT,
+G_exoU_72_B2 FLOAT,
+G_exoU_72_B3 FLOAT,
+G_exoYF_24_B1 FLOAT,
+G_exoYF_24_B2 FLOAT,
+G_exoYF_24_B3 FLOAT,
+G_exoYF_72_B1 FLOAT,
+G_exoYF_72_B2 FLOAT,
+G_exoYF_72_B3 FLOAT,
+G_H2O_24_B1 FLOAT,
+G_H2O_24_B2 FLOAT,
+G_H2O_24_B3 FLOAT,
+G_nodC_24_B1 FLOAT,
+G_nodC_24_B2 FLOAT,
+G_nodC_24_B3 FLOAT,
+G_R7A_24_B1 FLOAT,
+G_R7A_24_B2 FLOAT,
+G_R7A_24_B3 FLOAT,
+G_R7A_72_B1 FLOAT,
+G_R7A_72_B2 FLOAT,
+G_R7A_72_B3 FLOAT,
+sum FLOAT,
+277_exoU_24_B1_norm FLOAT,
+277_exoU_24_B2_norm FLOAT,
+277_exoU_24_B3_norm FLOAT,
+277_exoU_72_B1_norm FLOAT,
+277_exoU_72_B2_norm FLOAT,
+277_exoU_72_B3_norm FLOAT,
+277_exoYF_24_B1_norm FLOAT,
+277_exoYF_24_B2_norm FLOAT,
+277_exoYF_24_B3_norm FLOAT,
+277_exoYF_72_B1_norm FLOAT,
+277_exoYF_72_B2_norm FLOAT,
+277_exoYF_72_B3_norm FLOAT,
+277_H2O_24_B2_norm FLOAT,
+277_H2O_24_B3_norm FLOAT,
+277_nodC_24_B1_norm FLOAT,
+277_nodC_24_B2_norm FLOAT,
+277_nodC_24_B3_norm FLOAT,
+277_R7A_24_B1_norm FLOAT,
+277_R7A_24_B2_norm FLOAT,
+277_R7A_24_B3_norm FLOAT,
+277_R7A_72_B1_norm FLOAT,
+277_R7A_72_B2_norm FLOAT,
+277_R7A_72_B3_norm FLOAT,
+311_exoU_24_B1_norm FLOAT,
+311_exoU_24_B2_norm FLOAT,
+311_exoU_24_B3_norm FLOAT,
+311_exoU_72_B1_norm FLOAT,
+311_exoU_72_B2_norm FLOAT,
+311_exoU_72_B3_norm FLOAT,
+311_exoYF_24_B1_norm FLOAT,
+311_exoYF_24_B2_norm FLOAT,
+311_exoYF_24_B3_norm FLOAT,
+311_exoYF_72_B1_norm FLOAT,
+311_exoYF_72_B2_norm FLOAT,
+311_exoYF_72_B3_norm FLOAT,
+311_H2O_24_B1_norm FLOAT,
+311_H2O_24_B3_norm FLOAT,
+311_nodC_24_B1_norm FLOAT,
+311_nodC_24_B2_norm FLOAT,
+311_nodC_24_B3_norm FLOAT,
+311_R7A_24_B1_norm FLOAT,
+311_R7A_24_B2_norm FLOAT,
+311_R7A_24_B3_norm FLOAT,
+311_R7A_72_B1_norm FLOAT,
+311_R7A_72_B2_norm FLOAT,
+311_R7A_72_B3_norm FLOAT,
+G_exoU_24_B1_norm FLOAT,
+G_exoU_24_B2_norm FLOAT,
+G_exoU_24_B3_norm FLOAT,
+G_exoU_72_B1_norm FLOAT,
+G_exoU_72_B2_norm FLOAT,
+G_exoU_72_B3_norm FLOAT,
+G_exoYF_24_B1_norm FLOAT,
+G_exoYF_24_B2_norm FLOAT,
+G_exoYF_24_B3_norm FLOAT,
+G_exoYF_72_B1_norm FLOAT,
+G_exoYF_72_B2_norm FLOAT,
+G_exoYF_72_B3_norm FLOAT,
+G_H2O_24_B1_norm FLOAT,
+G_H2O_24_B2_norm FLOAT,
+G_H2O_24_B3_norm FLOAT,
+G_nodC_24_B1_norm FLOAT,
+G_nodC_24_B2_norm FLOAT,
+G_nodC_24_B3_norm FLOAT,
+G_R7A_24_B1_norm FLOAT,
+G_R7A_24_B2_norm FLOAT,
+G_R7A_24_B3_norm FLOAT,
+G_R7A_72_B1_norm FLOAT,
+G_R7A_72_B2_norm FLOAT,
+G_R7A_72_B3_norm FLOAT,
+sum_norm FLOAT,
+score FLOAT );
+
+LOAD DATA LOCAL INFILE '~/35_Simon_RNAseq/04_FeatureCount/02_TranscriptWise/20140807_AllSamples_FeatureCount.txt.values.norm' INTO TABLE  `20140810_AllSamples_Transcript_FeatureCount` IGNORE 1 LINES;
+
+CREATE INDEX `20140810_AllSamples_Transcript_FeatureCount.index` ON `20140810_AllSamples_Transcript_FeatureCount` (ID); 
+
+
+## add annotations
+CREATE TABLE 20140810_AllSamples_Transcript_FeatureCount_anno AS 
+(
+SELECT Lj30_ID,Chromosome,Start,END,nr_anno,cdsSeq_len,
+277_exoU_24_B1  ,
+277_exoU_24_B2  ,
+277_exoU_24_B3  ,
+277_exoU_72_B1  ,
+277_exoU_72_B2  ,
+277_exoU_72_B3  ,
+277_exoYF_24_B1  ,
+277_exoYF_24_B2  ,
+277_exoYF_24_B3  ,
+277_exoYF_72_B1  ,
+277_exoYF_72_B2  ,
+277_exoYF_72_B3  ,
+277_H2O_24_B2  ,
+277_H2O_24_B3  ,
+277_nodC_24_B1  ,
+277_nodC_24_B2  ,
+277_nodC_24_B3  ,
+277_R7A_24_B1  ,
+277_R7A_24_B2  ,
+277_R7A_24_B3  ,
+277_R7A_72_B1  ,
+277_R7A_72_B2  ,
+277_R7A_72_B3  ,
+311_exoU_24_B1  ,
+311_exoU_24_B2  ,
+311_exoU_24_B3  ,
+311_exoU_72_B1  ,
+311_exoU_72_B2  ,
+311_exoU_72_B3  ,
+311_exoYF_24_B1  ,
+311_exoYF_24_B2  ,
+311_exoYF_24_B3  ,
+311_exoYF_72_B1  ,
+311_exoYF_72_B2  ,
+311_exoYF_72_B3  ,
+311_H2O_24_B1  ,
+311_H2O_24_B3  ,
+311_nodC_24_B1  ,
+311_nodC_24_B2  ,
+311_nodC_24_B3  ,
+311_R7A_24_B1  ,
+311_R7A_24_B2  ,
+311_R7A_24_B3  ,
+311_R7A_72_B1  ,
+311_R7A_72_B2  ,
+311_R7A_72_B3  ,
+G_exoU_24_B1  ,
+G_exoU_24_B2  ,
+G_exoU_24_B3  ,
+G_exoU_72_B1  ,
+G_exoU_72_B2  ,
+G_exoU_72_B3  ,
+G_exoYF_24_B1  ,
+G_exoYF_24_B2  ,
+G_exoYF_24_B3  ,
+G_exoYF_72_B1  ,
+G_exoYF_72_B2  ,
+G_exoYF_72_B3  ,
+G_H2O_24_B1  ,
+G_H2O_24_B2  ,
+G_H2O_24_B3  ,
+G_nodC_24_B1  ,
+G_nodC_24_B2  ,
+G_nodC_24_B3  ,
+G_R7A_24_B1  ,
+G_R7A_24_B2  ,
+G_R7A_24_B3  ,
+G_R7A_72_B1  ,
+G_R7A_72_B2  ,
+G_R7A_72_B3  ,
+sum  ,
+277_exoU_24_B1_norm  ,
+277_exoU_24_B2_norm  ,
+277_exoU_24_B3_norm  ,
+277_exoU_72_B1_norm  ,
+277_exoU_72_B2_norm  ,
+277_exoU_72_B3_norm  ,
+277_exoYF_24_B1_norm  ,
+277_exoYF_24_B2_norm  ,
+277_exoYF_24_B3_norm  ,
+277_exoYF_72_B1_norm  ,
+277_exoYF_72_B2_norm  ,
+277_exoYF_72_B3_norm  ,
+277_H2O_24_B2_norm  ,
+277_H2O_24_B3_norm  ,
+277_nodC_24_B1_norm  ,
+277_nodC_24_B2_norm  ,
+277_nodC_24_B3_norm  ,
+277_R7A_24_B1_norm  ,
+277_R7A_24_B2_norm  ,
+277_R7A_24_B3_norm  ,
+277_R7A_72_B1_norm  ,
+277_R7A_72_B2_norm  ,
+277_R7A_72_B3_norm  ,
+311_exoU_24_B1_norm  ,
+311_exoU_24_B2_norm  ,
+311_exoU_24_B3_norm  ,
+311_exoU_72_B1_norm  ,
+311_exoU_72_B2_norm  ,
+311_exoU_72_B3_norm  ,
+311_exoYF_24_B1_norm  ,
+311_exoYF_24_B2_norm  ,
+311_exoYF_24_B3_norm  ,
+311_exoYF_72_B1_norm  ,
+311_exoYF_72_B2_norm  ,
+311_exoYF_72_B3_norm  ,
+311_H2O_24_B1_norm  ,
+311_H2O_24_B3_norm  ,
+311_nodC_24_B1_norm  ,
+311_nodC_24_B2_norm  ,
+311_nodC_24_B3_norm  ,
+311_R7A_24_B1_norm  ,
+311_R7A_24_B2_norm  ,
+311_R7A_24_B3_norm  ,
+311_R7A_72_B1_norm  ,
+311_R7A_72_B2_norm  ,
+311_R7A_72_B3_norm  ,
+G_exoU_24_B1_norm  ,
+G_exoU_24_B2_norm  ,
+G_exoU_24_B3_norm  ,
+G_exoU_72_B1_norm  ,
+G_exoU_72_B2_norm  ,
+G_exoU_72_B3_norm  ,
+G_exoYF_24_B1_norm  ,
+G_exoYF_24_B2_norm  ,
+G_exoYF_24_B3_norm  ,
+G_exoYF_72_B1_norm  ,
+G_exoYF_72_B2_norm  ,
+G_exoYF_72_B3_norm  ,
+G_H2O_24_B1_norm  ,
+G_H2O_24_B2_norm  ,
+G_H2O_24_B3_norm  ,
+G_nodC_24_B1_norm  ,
+G_nodC_24_B2_norm  ,
+G_nodC_24_B3_norm  ,
+G_R7A_24_B1_norm  ,
+G_R7A_24_B2_norm  ,
+G_R7A_24_B3_norm  ,
+G_R7A_72_B1_norm  ,
+G_R7A_72_B2_norm  ,
+G_R7A_72_B3_norm  ,
+sum_norm  ,
+score   
+FROM gene_models.20130801_Ljr30_genemodel t1 JOIN 35_Simon_RNAseq.20140810_AllSamples_Transcript_FeatureCount t2 
+ON t1.Lj30_ID=t2.ID
+);
+
+### check nin
+SELECT Lj30_ID, Chromosome,Start, cdsSeq_len, LEFT(nr_anno,50),  G_H2O_24_B3, G_exoU_24_B3, G_exoU_24_B3/G_H2O_24_B3 as Fold_Change
+FROM 20140810_AllSamples_Transcript_FeatureCount_anno 
+WHERE
+nr_anno LIKE '%nodule inception protein%';
+
+
+### check inoculation enrichment
+SELECT Lj30_ID, Chromosome,Start, cdsSeq_len, LEFT(nr_anno,50),  G_H2O_24_B3, G_R7A_24_B3, G_R7A_24_B3/G_H2O_24_B3 as Fold_Change
+FROM 20140810_AllSamples_Transcript_FeatureCount_anno 
+WHERE
+((G_R7A_24_B1+G_R7A_24_B2+G_R7A_24_B3)/3)/((G_H2O_24_B1+G_H2O_24_B2+G_H2O_24_B3)/3) > 10 
+OR ((G_R7A_24_B1+G_R7A_24_B2+G_R7A_24_B3)/3=0 AND ((G_H2O_24_B1+G_H2O_24_B2+G_H2O_24_B3)/3) > 50);
+
+
+##
+
+SELECT Lj30_ID, Chromosome,Start, cdsSeq_len, LEFT(nr_anno,50),  (G_exoU_72_B1+G_exoU_72_B3+G_exoU_72_B3)/3 AS G_exoU_72_Mean,
+(311_exoU_72_B1+311_exoU_72_B2+311_exoU_72_B3)/3 AS 311_exoU_72_Mean, ((G_exoU_72_B1+G_exoU_72_B3+G_exoU_72_B3)/3)/((311_exoU_72_B1+311_exoU_72_B2+311_exoU_72_B3)/3) as Fold_Change 
+FROM 20140810_AllSamples_Transcript_FeatureCount_anno 
+WHERE
+
+(
+((G_exoU_72_B1+G_exoU_72_B3+G_exoU_72_B3)/3) / ((311_exoU_72_B1+311_exoU_72_B2+311_exoU_72_B3)/3) > 10
+) 
+
+OR
+(
+(311_exoU_72_B1+311_exoU_72_B2+311_exoU_72_B3)/3=0 AND (G_exoU_72_B1+G_exoU_72_B3+G_exoU_72_B3)/3 > 50
+);
+
+
+### check nin
+SELECT Lj30_ID, Chromosome,Start, cdsSeq_len, LEFT(nr_anno,50),  G_H2O_24_B3, G_exoU_24_B3, G_exoU_24_B3/G_H2O_24_B3 as Fold_Change
+FROM 20140728_Allsample_2unique_transcript_HTseqCounts_anno 
+WHERE
+nr_anno LIKE '%nodule inception protein%';
  
  ## manually edit the headers
 
